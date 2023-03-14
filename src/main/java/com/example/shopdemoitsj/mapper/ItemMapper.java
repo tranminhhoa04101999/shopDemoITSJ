@@ -13,6 +13,18 @@ public class ItemMapper {
         return INSTANSE;
     }
     public Item toEntity(ItemDTO dto){
+        Item item = new Item();
+        item.setId(dto.getId());
+        item.setName(dto.getName());
+        item.setPrice(dto.getPrice());
+        return item;
+    }
 
+    public ItemDTO toDTO(Item item){
+        ItemDTO itemDTO = new ItemDTO();
+        itemDTO.setId(item.getId());
+        itemDTO.setName(item.getName());
+        itemDTO.setPrice(item.getPrice());
+        return itemDTO;
     }
 }

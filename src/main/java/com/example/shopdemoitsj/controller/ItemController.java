@@ -1,6 +1,8 @@
 package com.example.shopdemoitsj.controller;
 
 
+import com.example.shopdemoitsj.dto.ItemDTO;
+import com.example.shopdemoitsj.mapper.ItemMapper;
 import com.example.shopdemoitsj.model.Item;
 import com.example.shopdemoitsj.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +20,10 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-//    @GetMapping("/items")
-//    public ResponseEntity<Item> getItems(){
-//        return new ResponseEntity<>(itemService.getItems(), HttpStatus.OK);
-//    }
+    @GetMapping("/items")
+    public ResponseEntity<List<ItemDTO>> getItems(){
+        return new ResponseEntity<>(itemService.findAll(), HttpStatus.OK);
+    }
 
 
 }
