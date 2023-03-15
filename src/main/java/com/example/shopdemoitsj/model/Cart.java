@@ -1,7 +1,16 @@
 package com.example.shopdemoitsj.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "cart")
 public class Cart {
@@ -12,24 +21,5 @@ public class Cart {
     @ManyToOne
     @JoinColumn(name = "customerid")
     private Customer customer;
-
-    public Cart() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
 }

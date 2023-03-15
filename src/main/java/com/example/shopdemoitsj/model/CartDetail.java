@@ -17,14 +17,14 @@ public class CartDetail {
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name = "item")
+    @JoinColumn(name = "itemid")
     private Item item;
 
     private int quantity;
 
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JoinColumn(name = "dateadded")
+    @Column(name = "dateadded")
     private Date dateAdded;
 
     public CartDetail() {
