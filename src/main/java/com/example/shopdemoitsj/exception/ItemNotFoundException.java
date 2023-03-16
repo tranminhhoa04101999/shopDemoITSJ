@@ -1,6 +1,6 @@
 package com.example.shopdemoitsj.exception;
 
-public class ItemNotFoundException extends Exception{
-
-
-}
+/**
+ * exception.
+ * */
+public class ItemNotFoundException extends Exception {}

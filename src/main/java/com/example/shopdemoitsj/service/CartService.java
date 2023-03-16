@@ -1,10 +1,10 @@
 package com.example.shopdemoitsj.service;
 
+import com.example.shopdemoitsj.dto.CartDto;
 
-import com.example.shopdemoitsj.dto.AddToCartDTO;
-import com.example.shopdemoitsj.dto.CartDTO;
-
+/**
+ * cart service interface.
+ * */
 public interface CartService {
-    CartDTO findByCustomerId(int customerId);
-
+  CartDto findByCustomerId(int customerId);
 }

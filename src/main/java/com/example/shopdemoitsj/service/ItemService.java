@@ -1,16 +1,18 @@
 package com.example.shopdemoitsj.service;
 
-import com.example.shopdemoitsj.dto.ItemDTO;
+import com.example.shopdemoitsj.dto.ItemDto;
 import com.example.shopdemoitsj.exception.ItemNotFoundException;
-
 import java.util.List;
 
+/**
+ * item service interface.
+ * */
 public interface ItemService {
-    List<ItemDTO> findAll();
+  List<ItemDto> findAll();
 
-    ItemDTO findById(int id) throws ItemNotFoundException;
+  ItemDto findById(int id) throws ItemNotFoundException;
 
-    void save(ItemDTO itemDTO);
+  void save(ItemDto itemDto);
 
-    void delete(int itemId);
+  void delete(int itemId);
 }

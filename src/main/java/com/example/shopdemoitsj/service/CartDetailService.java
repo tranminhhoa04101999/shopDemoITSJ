@@ -1,8 +1,10 @@
 package com.example.shopdemoitsj.service;
 
-import com.example.shopdemoitsj.dto.AddToCartDTO;
-import com.example.shopdemoitsj.model.CartDetail;
+import com.example.shopdemoitsj.dto.AddToCartDto;
 
+/**
+ * cartdetail service .
+ * */
 public interface CartDetailService {
-    void add(AddToCartDTO AddToCartDTO);
+  void add(AddToCartDto addToCartDto);
 }

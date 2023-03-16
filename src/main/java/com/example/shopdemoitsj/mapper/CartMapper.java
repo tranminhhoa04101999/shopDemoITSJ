@@ -1,33 +1,44 @@
 package com.example.shopdemoitsj.mapper;
 
-import com.example.shopdemoitsj.dto.CartDTO;
-import com.example.shopdemoitsj.dto.CartDetailDTO;
-import com.example.shopdemoitsj.dto.CustomerDTO;
+import com.example.shopdemoitsj.dto.CartDetailDto;
+import com.example.shopdemoitsj.dto.CartDto;
 import com.example.shopdemoitsj.model.Cart;
-
 import java.util.List;
 
+/**
+ * mapper.
+ * */
 public class CartMapper {
-    private static CartMapper INSTANCE;
+  private static CartMapper instance;
 
-    public static CartMapper getInstance(){
-        if(INSTANCE == null){
-            INSTANCE = new CartMapper();
-        }
-        return INSTANCE;
+  /**
+   * instance.
+   * */
+  public static CartMapper getInstance() {
+    if (instance == null) {
+      instance = new CartMapper();
     }
+    return instance;
+  }
+  /**
+   * chuyen doi tu cart qua entity.
+   * */
 
-    public Cart toEntity(CartDTO cartDTO){
-        Cart cart = new Cart();
-        cart.setId(cartDTO.getId());
-        cart.setCustomer(CustomerMapper.getInstance().toEntity(cartDTO.getCustomerDTO()));
-        return cart;
-    }
-    public CartDTO toDTO (Cart cart, List<CartDetailDTO> cartDetailDTOList){
-        CartDTO cartDTO = new CartDTO();
-        cartDTO.setId(cart.getId());
-        cartDTO.setCustomerDTO(CustomerMapper.getInstance().toDTO(cart.getCustomer()));
-        cartDTO.setCartDetailDTOS(cartDetailDTOList);
-        return cartDTO;
-    }
+  public Cart toEntity(CartDto cartDto) {
+    Cart cart = new Cart();
+    cart.setId(cartDto.getId());
+    cart.setCustomer(CustomerMapper.getInstance().toEntity(cartDto.getCustomerDto()));
+    return cart;
+  }
+
+  /**
+   * chuyen doi qua dto.
+   * */
+  public CartDto toDto(Cart cart, List<CartDetailDto> cartDetailDtoList) {
+    CartDto toDto = new CartDto();
+    toDto.setId(cart.getId());
+    toDto.setCustomerDto(CustomerMapper.getInstance().toDto(cart.getCustomer()));
+    toDto.setCartDetailDtos(cartDetailDtoList);
+    return toDto;
+  }
 }

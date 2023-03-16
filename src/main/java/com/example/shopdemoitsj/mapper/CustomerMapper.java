@@ -1,53 +1,47 @@
 package com.example.shopdemoitsj.mapper;
 
-import com.example.shopdemoitsj.dto.CustomerDTO;
+import com.example.shopdemoitsj.dto.CustomerDto;
 import com.example.shopdemoitsj.model.Customer;
 
+/**
+ * mapper.
+ * */
 public class CustomerMapper {
-    private static CustomerMapper INSTANCE;
+  private static CustomerMapper instance;
 
-    public static CustomerMapper getInstance(){
-        if(INSTANCE == null){
-            INSTANCE = new CustomerMapper();
-        }
-        return INSTANCE;
+  /**
+   * instance.
+   * */
+  public static CustomerMapper getInstance() {
+    if (instance == null) {
+      instance = new CustomerMapper();
     }
+    return instance;
+  }
 
-    public CustomerDTO toDTO(Customer customer){
-        CustomerDTO customerDTO = new CustomerDTO();
-        customerDTO.setId(customer.getId());
-        customerDTO.setUsername(customer.getUsername());
-        customerDTO.setPassword(customer.getPassword());
-        customerDTO.setType(customer.getType());
+  /**
+   * chuyen doi qua dto.
+   * */
+  public CustomerDto toDto(Customer customer) {
+    CustomerDto customerDto = new CustomerDto();
+    customerDto.setId(customer.getId());
+    customerDto.setUsername(customer.getUsername());
+    customerDto.setPassword(customer.getPassword());
+    customerDto.setType(customer.getType());
 
-        return customerDTO;
-    }
-    public Customer toEntity(CustomerDTO customerDTO){
-        Customer customer = new Customer();
-        customer.setId(customerDTO.getId());
-        customer.setUsername(customerDTO.getUsername());
-        customer.setPassword(customerDTO.getPassword());
-        customer.setType(customerDTO.getType());
+    return customerDto;
+  }
 
-        return customer;
-    }
+  /**
+   * chuyen doi qua entity.
+   * */
+  public Customer toEntity(CustomerDto customerDto) {
+    Customer customer = new Customer();
+    customer.setId(customerDto.getId());
+    customer.setUsername(customerDto.getUsername());
+    customer.setPassword(customerDto.getPassword());
+    customer.setType(customerDto.getType());
+
+    return customer;
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

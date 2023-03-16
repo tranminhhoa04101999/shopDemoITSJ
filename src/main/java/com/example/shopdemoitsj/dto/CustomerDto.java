@@ -1,18 +1,21 @@
 package com.example.shopdemoitsj.dto;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.io.Serializable;
-import java.util.List;
 
+/**
+ *  dto.
+ * */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartDTO implements Serializable {
-    private int id;
-    private CustomerDTO customerDTO;
-    private List<CartDetailDTO> cartDetailDTOS;
+public class CustomerDto implements Serializable {
+  private int id;
+  private String username;
+  private String password;
+  private int type;
 }

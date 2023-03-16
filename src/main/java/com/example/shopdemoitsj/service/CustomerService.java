@@ -1,14 +1,16 @@
 package com.example.shopdemoitsj.service;
 
-import com.example.shopdemoitsj.dto.CustomerDTO;
+import com.example.shopdemoitsj.dto.CustomerDto;
 import com.example.shopdemoitsj.exception.CustomerNotFoundException;
-
 import java.util.List;
 
+/**
+ * customer service interface.
+ * */
 public interface CustomerService {
-    List<CustomerDTO> findAll();
+  List<CustomerDto> findAll();
 
-    CustomerDTO findById(int custonmerId) throws CustomerNotFoundException;
+  CustomerDto findById(int custonmerId) throws CustomerNotFoundException;
 
-    void save(CustomerDTO customerDTO);
+  void save(CustomerDto customerDto);
 }

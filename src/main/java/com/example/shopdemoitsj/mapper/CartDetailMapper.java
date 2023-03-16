@@ -1,26 +1,34 @@
 package com.example.shopdemoitsj.mapper;
 
-import com.example.shopdemoitsj.dto.CartDetailDTO;
+import com.example.shopdemoitsj.dto.CartDetailDto;
 import com.example.shopdemoitsj.model.CartDetail;
 
+/**
+ *  mapper.
+ * */
 public class CartDetailMapper {
-    private static CartDetailMapper INSTANCE;
+  private static CartDetailMapper instance;
 
-    public static CartDetailMapper getInstance(){
-        if(INSTANCE == null){
-            INSTANCE = new CartDetailMapper();
-        }
-        return INSTANCE;
+  /**
+   *  intansce.
+   * */
+  public static CartDetailMapper getInstance() {
+    if (instance == null) {
+      instance = new CartDetailMapper();
     }
-    public CartDetailDTO toDTO (CartDetail cartDetail){
-        CartDetailDTO cartDetailDTO = new CartDetailDTO();
-        cartDetailDTO.setId(cartDetail.getId());
-        cartDetailDTO.setItemDTO(ItemMapper.getInstance().toDTO(cartDetail.getItem()));
-        cartDetailDTO.setQuantity(cartDetail.getQuantity());
-        cartDetailDTO.setDateAdded(cartDetail.getDateAdded());
+    return instance;
+  }
 
-        return cartDetailDTO;
-    }
+  /**
+   *  todto.
+   * */
+  public CartDetailDto toDto(CartDetail cartDetail) {
+    CartDetailDto cartDetailDto = new CartDetailDto();
+    cartDetailDto.setId(cartDetail.getId());
+    cartDetailDto.setItemDto(ItemMapper.getInstance().toDto(cartDetail.getItem()));
+    cartDetailDto.setQuantity(cartDetail.getQuantity());
+    cartDetailDto.setDateAdded(cartDetail.getDateAdded());
 
-
+    return cartDetailDto;
+  }
 }
