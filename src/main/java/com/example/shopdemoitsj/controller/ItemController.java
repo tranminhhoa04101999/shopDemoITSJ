@@ -38,13 +38,13 @@ public class ItemController {
 
   @PostMapping("/items")
   public ResponseEntity<HttpStatus> save(@RequestBody ItemDto itemDto) {
-    itemServiceImpl.save(itemDto);
+    itemServiceImpl.saveItem(itemDto);
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
 
   @PutMapping("/items")
   public ResponseEntity<HttpStatus> update(@RequestBody ItemDto itemDto) {
-    itemServiceImpl.save(itemDto);
+    itemServiceImpl.saveItem(itemDto);
     return new ResponseEntity<>(HttpStatus.OK);
   }
 

@@ -12,7 +12,7 @@ public interface ItemService {
 
   ItemDto findById(int id) throws ItemNotFoundException;
 
-  void save(ItemDto itemDto);
+  ItemDto saveItem(ItemDto itemDto);
 
   void delete(int itemId);
 }

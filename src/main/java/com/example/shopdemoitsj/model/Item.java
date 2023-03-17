@@ -6,15 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * model.
- * */
-@Getter
-@Setter
+/** model. */
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -26,8 +25,4 @@ public class Item {
 
   private String name;
   private double price;
-
-  public Item(int id) {
-    this.id= id;
-  }
 }

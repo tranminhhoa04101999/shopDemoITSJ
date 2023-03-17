@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,8 +16,7 @@ import lombok.Setter;
 /**
  * model.
  * */
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -28,7 +28,7 @@ public class OrderDetail {
 
   @ManyToOne
   @JoinColumn(name = "orderid")
-  private Order order;
+  private Orders orders;
 
   @ManyToOne
   @JoinColumn(name = "itemid")

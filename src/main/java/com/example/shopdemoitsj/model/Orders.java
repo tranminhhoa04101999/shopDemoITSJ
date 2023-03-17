@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,13 +21,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 /**
  * model.
  * */
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "order")
-public class Order {
+@Table(name = "orders")
+public class Orders {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
@@ -40,4 +40,5 @@ public class Order {
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   @Column(name = "orderdate")
   private Date orderDate;
+
 }

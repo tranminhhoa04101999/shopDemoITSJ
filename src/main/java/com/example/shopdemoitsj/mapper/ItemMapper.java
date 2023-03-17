@@ -7,11 +7,14 @@ import com.example.shopdemoitsj.model.Item;
  * mapper.
  * */
 public class ItemMapper {
+  /** The constant INSTANCE. */
   private static ItemMapper instance;
 
   /**
-   * instance.
-   * */
+   * Gets instance.
+   *
+   * @return the instance
+   */
   public static ItemMapper getInstance() {
     if (instance == null) {
       instance = new ItemMapper();
@@ -20,29 +23,25 @@ public class ItemMapper {
   }
 
   /**
-   * step 1: chuyen dto qua entity.
+   * To entity item.
    *
-   * @param dto itemdto chuyen vao.
-   * @Return tra ra model item.
-   *
-   * */
-
-  public Item toEntity(ItemDto dto) {
+   * @param itemDto the item dto
+   * @return the item
+   */
+  public Item toEntity(ItemDto itemDto) {
     Item item = new Item();
-    item.setId(dto.getId());
-    item.setName(dto.getName());
-    item.setPrice(dto.getPrice());
+    item.setId(itemDto.getId());
+    item.setName(itemDto.getName());
+    item.setPrice(itemDto.getPrice());
     return item;
   }
 
   /**
-   * step 1: chuyen entity qua dto.
+   * To dto item dto.
    *
-   * @param item item model chuyen vao.
-   * @Return tra ra dto item.
-   *
-   * */
-
+   * @param item the item
+   * @return the item dto
+   */
   public ItemDto toDto(Item item) {
     ItemDto itemDto = new ItemDto();
     itemDto.setId(item.getId());

@@ -11,13 +11,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-/**
- * item service impl item interface.
- * */
+/** item service impl item interface. */
 @Service
+@Transactional(rollbackFor = Throwable.class)
 public class ItemServiceImpl implements ItemService {
-  @Autowired private ItemRepository itemRepository;
+  @Autowired ItemRepository itemRepository;
 
   @Override
   public List<ItemDto> findAll() {
@@ -40,14 +40,13 @@ public class ItemServiceImpl implements ItemService {
   }
 
   @Override
-  public void save(ItemDto itemDto) {
-    itemRepository.save(ItemMapper.getInstance().toEntity(itemDto));
+  public ItemDto saveItem(ItemDto itemDto) {
+    Item item = ItemMapper.getInstance().toEntity(itemDto);
+    return ItemMapper.getInstance().toDto(itemRepository.save(item));
   }
 
   @Override
   public void delete(int itemId) {
-    Item item = new Item();
-    item.setId(itemId);
-    itemRepository.delete(item);
+    itemRepository.deleteById(itemId);
   }
 }
