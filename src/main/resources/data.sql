@@ -16,7 +16,9 @@ INSERT INTO cartdetail(cartid,itemid,quantity,dateadded) values (1,1,2,'2023-03-
 
 -- order
 INSERT INTO orders(customerid,orderdate) values (2,'2023-03-20')
+INSERT INTO orders(customerid,orderdate) values (2,'2023-03-21')
 
 -- order detail
 INSERT INTO orderdetail(orderid,itemid,quantity) values (1,1,2)
+INSERT INTO orderdetail(orderid,itemid,quantity) values (2,3,2)
 

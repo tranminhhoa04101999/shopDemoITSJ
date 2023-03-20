@@ -4,11 +4,13 @@ import com.example.shopdemoitsj.dto.AddToCartDto;
 import com.example.shopdemoitsj.dto.CartDetailDto;
 import com.example.shopdemoitsj.dto.CartDto;
 import com.example.shopdemoitsj.model.CartDetail;
+import com.example.shopdemoitsj.repository.CartDetailRepository;
 import com.example.shopdemoitsj.service.impl.CartDetailServiceImpl;
 import com.example.shopdemoitsj.service.impl.CartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,8 @@ public class CartController {
 
   @Autowired private CartDetailServiceImpl cartDetailService;
 
+  @Autowired private CartDetailRepository cartDetailRepository;
+
   @GetMapping("/carts/{customerId}")
   public CartDto findById(@PathVariable int customerId) {
     return cartServiceImpl.findByCustomerId(customerId);
@@ -40,5 +44,12 @@ public class CartController {
   public ResponseEntity<HttpStatus> updateCartDetail(@RequestBody CartDetailDto cartDetailDto) {
     cartDetailService.update(cartDetailDto);
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  }
+
+  @DeleteMapping("/carts/{cartDetailId}")
+  public ResponseEntity<HttpStatus> deleteCartDetail(@PathVariable int cartDetailId){
+    cartDetailRepository.deleteById(cartDetailId);
+    return new ResponseEntity<>(HttpStatus.OK);
+
   }
 }
