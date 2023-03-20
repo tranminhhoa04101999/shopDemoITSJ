@@ -1,6 +1,5 @@
 package com.example.shopdemoitsj.service.impl;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
@@ -9,10 +8,12 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.example.shopdemoitsj.dto.AddToCartDto;
 import com.example.shopdemoitsj.dto.CartDetailDto;
 import com.example.shopdemoitsj.dto.CartDto;
 import com.example.shopdemoitsj.dto.ItemDto;
 import com.example.shopdemoitsj.exception.ItemNotFoundException;
+import com.example.shopdemoitsj.mapper.CartDetailMapper;
 import com.example.shopdemoitsj.mapper.CartMapper;
 import com.example.shopdemoitsj.mapper.ItemMapper;
 import com.example.shopdemoitsj.model.Cart;
@@ -39,57 +40,38 @@ import org.mockito.quality.Strictness;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-class CartServiceImplTest {
-  @Mock
-  CartRepository cartRepository;
-  @Mock
-  CartDetailRepository cartDetailRepository;
+class CartDetailServiceImplTest {
 
-  @InjectMocks
-  CartServiceImpl cartService;
+  @Mock CartDetailRepository cartDetailRepository;
   @InjectMocks CartDetailServiceImpl cartDetailService;
 
-  Cart cart;
-  CartDto cartDto;
-  Customer customer;
-  List<CartDetail> cartDetailList = new ArrayList<>();
+  CartDetail cartDetail;
+  CartDetailDto cartDetailDto;
 
   @BeforeEach
   void init() {
-    customer = new Customer(1,"hoa","password",1);
-    cart = new Cart(1,customer);
-    List<CartDetailDto> cartDetailDtoList = new ArrayList<>();
-    cartDto = CartMapper.getInstance().toDto(cart,cartDetailDtoList);
-
-    cartDetailList.add(new CartDetail(1,cart,new Item(1,"ban",1000),2,new Date()));
+    Customer customer = new Customer(1,"hoa","123",0);
+    Cart cart = new Cart(1,customer);
+    Item item = new Item(1,"go",123);
+    cartDetail = new CartDetail(1,cart,item,2,new Date());
+    cartDetailDto = CartDetailMapper.getInstance().toDto(cartDetail);
   }
-
   @AfterEach
   void clean() {
-    cart = null;
-    cartDto = null;
-    customer = null;
-    cartDetailList= null;
+    cartDetailDto = null;
+    cartDetail =null;
   }
+//
 //  @Test
-//  void whenFindByCustomerId_thenReturnCart() {
-//    when(cartRepository.findByCustomerId(customer.getId())).thenReturn(cart);
-//    when(cartDetailRepository.findByCartId(cart.getId())).thenReturn(cartDetailList);
+//  void whenAdd_thenReturnTrue() {
+//    when(cartDetailRepository.save(cartDetail)).thenReturn(cartDetail);
+//    AddToCartDto addToCartDto = new AddToCartDto(cartDetail.getItem().getId(),cartDetail.getQuantity(),cartDetail.getCart().getCustomer().getId());
+//    CartDetailDto result = cartDetailService.add(addToCartDto);
 //
-//    CartDto result = cartService.findByCustomerId(customer.getId());
-//
-////    assertThat(result).isNotNull();
+//    assertThat(result).isNotNull().isEqualTo(cartDetailDto);
 //  }
 
 }
-
-
-
-
-
-
-
-
 
 
 

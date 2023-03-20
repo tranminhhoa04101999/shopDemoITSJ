@@ -40,7 +40,8 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  public void save(CustomerDto customerDto) {
+  public CustomerDto save(CustomerDto customerDto) {
     customerRepository.save(CustomerMapper.getInstance().toEntity(customerDto));
+    return customerDto;
   }
 }

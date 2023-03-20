@@ -1,6 +1,8 @@
 package com.example.shopdemoitsj.service.impl;
 
 import com.example.shopdemoitsj.dto.AddToCartDto;
+import com.example.shopdemoitsj.dto.CartDetailDto;
+import com.example.shopdemoitsj.mapper.CartDetailMapper;
 import com.example.shopdemoitsj.model.Cart;
 import com.example.shopdemoitsj.model.CartDetail;
 import com.example.shopdemoitsj.model.Customer;
@@ -27,12 +29,18 @@ public class CartDetailServiceImpl implements CartDetailService {
   @Autowired private ItemRepository itemRepository;
 
   @Override
-  public void add(AddToCartDto addToCartDto) {
+  public CartDetailDto add(AddToCartDto addToCartDto) {
     Customer customer;
     Optional<Customer> customerOptional = customerRepository.findById(addToCartDto.getCustomerId());
     customer = customerOptional.orElseGet(Customer::new);
 
+    // kiểm tra coi tbl giỏ hàng được tạo chưa
     Cart cart = cartRepository.findByCustomerId(customer.getId());
+    if(cart == null) {
+      cartRepository.save(new Cart(0,customer));
+      cart = cartRepository.findByCustomerId(customer.getId());
+    }
+
     Item item;
     Optional<Item> itemOpt = itemRepository.findById(addToCartDto.getItemId());
     item = itemOpt.orElseGet(Item::new);
@@ -45,6 +53,30 @@ public class CartDetailServiceImpl implements CartDetailService {
     cartDetail.setQuantity(addToCartDto.getQuantity());
     cartDetail.setDateAdded(new Date());
 
-    cartDetailRepository.save(cartDetail);
+    return CartDetailMapper.getInstance().toDto(cartDetailRepository.save(cartDetail));
+  }
+
+  @Override
+  public CartDetailDto update(CartDetailDto cartDetailDto) {
+      CartDetail cartDetail = CartDetailMapper.getInstance().toEntity(cartDetailDto);
+    return CartDetailMapper.getInstance().toDto(cartDetailRepository.save(cartDetail));
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

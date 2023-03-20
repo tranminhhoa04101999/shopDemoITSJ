@@ -12,5 +12,5 @@ public interface CustomerService {
 
   CustomerDto findById(int custonmerId) throws CustomerNotFoundException;
 
-  void save(CustomerDto customerDto);
+  CustomerDto save(CustomerDto customerDto);
 }

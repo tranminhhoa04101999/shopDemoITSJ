@@ -1,12 +1,10 @@
 package com.example.shopdemoitsj.dto;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 /**
  * chuyển đổi dữ liệu giỏ hàng qua dto.
@@ -14,8 +12,8 @@ import lombok.Setter;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartDto implements Serializable {
+public class OrdersDto implements Serializable {
   private int id;
   private CustomerDto customerDto;
-  private List<CartDetailDto> cartDetailDtos;
+  private Date orderdate;
 }

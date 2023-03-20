@@ -31,4 +31,16 @@ public class CartDetailMapper {
 
     return cartDetailDto;
   }
+  /**
+   *  to entity.
+   * */
+  public CartDetail toEntity(CartDetailDto dto) {
+    CartDetail cartDetail = new CartDetail();
+    cartDetail.setId(dto.getId());
+    cartDetail.setCart(CartMapper.getInstance().toEntity(dto.getCartDto()));
+    cartDetail.setItem(ItemMapper.getInstance().toEntity(dto.getItemDto()));
+    cartDetail.setQuantity(dto.getQuantity());
+    cartDetail.setDateAdded(dto.getDateAdded());
+    return cartDetail;
+  }
 }

@@ -23,4 +23,16 @@ public class ApiExceptionHandler {
   public ErrorMessage itemNotFoundException(Exception ex, WebRequest request) {
     return new ErrorMessage(404, "Không tìm thấy item có id đó");
   }
+
+  @ExceptionHandler(CustomerNotFoundException.class)
+  @ResponseStatus(value = HttpStatus.NOT_FOUND)
+  public ErrorMessage customerNotFoundException(Exception ex, WebRequest request) {
+    return new ErrorMessage(404, "Không tìm thấy customer có id đó");
+  }
+
+  @ExceptionHandler(OrdersNotFoundException.class)
+  @ResponseStatus(value = HttpStatus.NOT_FOUND)
+  public ErrorMessage ordersNotFoundException(Exception ex, WebRequest request) {
+    return new ErrorMessage(404, "Không tìm thấy order có id đó");
+  }
 }

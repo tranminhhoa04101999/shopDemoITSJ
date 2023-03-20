@@ -29,8 +29,4 @@ public class Customer {
   private String username;
   private String password;
   private int type;
-
-  public Customer(int id) {
-    this.id = id;
-  }
 }

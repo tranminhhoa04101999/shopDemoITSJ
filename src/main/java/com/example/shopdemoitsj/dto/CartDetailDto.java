@@ -5,12 +5,14 @@ import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /** chi tiet gio hang. */
+@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,6 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class CartDetailDto implements Serializable {
   private int id;
   private ItemDto itemDto;
+  private CartDto cartDto;
   private int quantity;
 
   @Temporal(TemporalType.DATE)

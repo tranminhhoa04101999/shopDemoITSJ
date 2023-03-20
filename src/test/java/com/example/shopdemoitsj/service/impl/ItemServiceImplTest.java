@@ -24,8 +24,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 @ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 class ItemServiceImplTest {
   @Mock ItemRepository itemRepository;
 
@@ -106,16 +109,18 @@ class ItemServiceImplTest {
     verify(itemRepository, times(1)).deleteById(item.getId());
   }
 
-  //  @Test
-  //  @DisplayName("JUNIT test update item By Id")
-  //  void giveItemId_whenUpdate_thenReturnItemUpdate(){
-  //    //precodition
-  //    when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
-  //    item.setName("tenmoi");
-  //    when(itemRepository.save(item)).thenReturn(item);
-  //    ItemDto result = itemService.save(ItemMapper.getInstance().toDto(item));
-  //    // when
-  //    assertThat(result.getName()).isEqualTo(item.getName());
-  //    // then
-  //  }
+  @Test
+  @DisplayName("JUNIT test update item By Id")
+  void giveItemId_whenUpdate_thenReturnItemUpdate() {
+    // precodition
+    when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
+    item.setName("tenmoi");
+    when(itemRepository.save(item)).thenReturn(item);
+    // when
+    ItemDto result = itemService.saveItem(ItemMapper.getInstance().toDto(item));
+
+    // then
+    assertThat(result.getName()).isEqualTo(item.getName());
+
+  }
 }
