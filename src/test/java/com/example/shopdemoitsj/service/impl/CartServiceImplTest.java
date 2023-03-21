@@ -1,35 +1,19 @@
 package com.example.shopdemoitsj.service.impl;
 
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import com.example.shopdemoitsj.dto.CartDetailDto;
 import com.example.shopdemoitsj.dto.CartDto;
-import com.example.shopdemoitsj.dto.ItemDto;
-import com.example.shopdemoitsj.exception.ItemNotFoundException;
 import com.example.shopdemoitsj.mapper.CartMapper;
-import com.example.shopdemoitsj.mapper.ItemMapper;
 import com.example.shopdemoitsj.model.Cart;
 import com.example.shopdemoitsj.model.CartDetail;
 import com.example.shopdemoitsj.model.Customer;
 import com.example.shopdemoitsj.model.Item;
 import com.example.shopdemoitsj.repository.CartDetailRepository;
 import com.example.shopdemoitsj.repository.CartRepository;
-import com.example.shopdemoitsj.repository.ItemRepository;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -40,13 +24,10 @@ import org.mockito.quality.Strictness;
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 class CartServiceImplTest {
-  @Mock
-  CartRepository cartRepository;
-  @Mock
-  CartDetailRepository cartDetailRepository;
+  @Mock CartRepository cartRepository;
+  @Mock CartDetailRepository cartDetailRepository;
 
-  @InjectMocks
-  CartServiceImpl cartService;
+  @InjectMocks CartServiceImpl cartService;
   @InjectMocks CartDetailServiceImpl cartDetailService;
 
   Cart cart;
@@ -56,12 +37,12 @@ class CartServiceImplTest {
 
   @BeforeEach
   void init() {
-    customer = new Customer(1,"hoa","password",1);
-    cart = new Cart(1,customer);
+    customer = new Customer(1, "hoa", "password", 1);
+    cart = new Cart(1, customer);
     List<CartDetailDto> cartDetailDtoList = new ArrayList<>();
-    cartDto = CartMapper.getInstance().toDto(cart,cartDetailDtoList);
+    cartDto = CartMapper.getInstance().toDto(cart, cartDetailDtoList);
 
-    cartDetailList.add(new CartDetail(1,cart,new Item(1,"ban",1000),2,new Date()));
+    cartDetailList.add(new CartDetail(1, cart, new Item(1, "ban", 1000), 2, new Date()));
   }
 
   @AfterEach
@@ -69,42 +50,16 @@ class CartServiceImplTest {
     cart = null;
     cartDto = null;
     customer = null;
-    cartDetailList= null;
+    cartDetailList = null;
   }
-//  @Test
-//  void whenFindByCustomerId_thenReturnCart() {
-//    when(cartRepository.findByCustomerId(customer.getId())).thenReturn(cart);
-//    when(cartDetailRepository.findByCartId(cart.getId())).thenReturn(cartDetailList);
-//
-//    CartDto result = cartService.findByCustomerId(customer.getId());
-//
-////    assertThat(result).isNotNull();
-//  }
+  //  @Test
+  //  void whenFindByCustomerId_thenReturnCart() {
+  //    when(cartRepository.findByCustomerId(customer.getId())).thenReturn(cart);
+  //    when(cartDetailRepository.findByCartId(cart.getId())).thenReturn(cartDetailList);
+  //
+  //    CartDto result = cartService.findByCustomerId(customer.getId());
+  //
+  ////    assertThat(result).isNotNull();
+  //  }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

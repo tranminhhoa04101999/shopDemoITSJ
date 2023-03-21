@@ -34,6 +34,7 @@ public class CartDetailMapper {
   /**
    *  to entity.
    * */
+
   public CartDetail toEntity(CartDetailDto dto) {
     CartDetail cartDetail = new CartDetail();
     cartDetail.setId(dto.getId());

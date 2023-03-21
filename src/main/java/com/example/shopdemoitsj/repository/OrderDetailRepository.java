@@ -1,15 +1,12 @@
 package com.example.shopdemoitsj.repository;
 
 import com.example.shopdemoitsj.model.OrderDetail;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-/**
- * jpa.
- * */
+/** jpa. */
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Integer> {
-    List<OrderDetail> findByOrdersId (int id);
+  List<OrderDetail> findByOrdersId(int id);
 
-
+  List<OrderDetail> findByItemId(int itemId);
 }

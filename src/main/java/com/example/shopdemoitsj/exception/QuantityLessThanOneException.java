@@ -3,5 +3,6 @@ package com.example.shopdemoitsj.exception;
 /**
  * exception.
  * */
-public class OrderDetailNotFoundException extends Exception{
+public class QuantityLessThanOneException extends Exception{
+
 }

@@ -3,7 +3,8 @@ package com.example.shopdemoitsj.controller;
 import com.example.shopdemoitsj.dto.AddToCartDto;
 import com.example.shopdemoitsj.dto.CartDetailDto;
 import com.example.shopdemoitsj.dto.CartDto;
-import com.example.shopdemoitsj.model.CartDetail;
+import com.example.shopdemoitsj.exception.CartDetailNotFoundException;
+import com.example.shopdemoitsj.exception.QuantityLessThanOneException;
 import com.example.shopdemoitsj.repository.CartDetailRepository;
 import com.example.shopdemoitsj.service.impl.CartDetailServiceImpl;
 import com.example.shopdemoitsj.service.impl.CartServiceImpl;
@@ -30,26 +31,25 @@ public class CartController {
   @Autowired private CartDetailRepository cartDetailRepository;
 
   @GetMapping("/carts/{customerId}")
-  public CartDto findById(@PathVariable int customerId) {
+  public CartDto findById(@PathVariable int customerId) throws CartDetailNotFoundException {
     return cartServiceImpl.findByCustomerId(customerId);
   }
 
   @PostMapping("/carts")
   public ResponseEntity<CartDetailDto> addToCart(@RequestBody AddToCartDto addToCartDto) {
     CartDetailDto dto = cartDetailService.add(addToCartDto);
-    return new ResponseEntity<>(dto,HttpStatus.OK);
+    return new ResponseEntity<>(dto, HttpStatus.OK);
   }
 
   @PutMapping("/carts")
-  public ResponseEntity<HttpStatus> updateCartDetail(@RequestBody CartDetailDto cartDetailDto) {
-    cartDetailService.update(cartDetailDto);
-    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  public ResponseEntity<CartDetailDto> updateCartDetail(@RequestBody CartDetailDto cartDetailDto)
+      throws QuantityLessThanOneException {
+    return new ResponseEntity<>(cartDetailService.update(cartDetailDto), HttpStatus.NO_CONTENT);
   }
 
   @DeleteMapping("/carts/{cartDetailId}")
-  public ResponseEntity<HttpStatus> deleteCartDetail(@PathVariable int cartDetailId){
+  public ResponseEntity<HttpStatus> deleteCartDetail(@PathVariable int cartDetailId) {
     cartDetailRepository.deleteById(cartDetailId);
     return new ResponseEntity<>(HttpStatus.OK);
-
   }
 }

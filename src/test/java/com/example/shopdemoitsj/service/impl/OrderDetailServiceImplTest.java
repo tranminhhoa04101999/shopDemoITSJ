@@ -5,6 +5,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.example.shopdemoitsj.dto.OrderDetailDto;
+import com.example.shopdemoitsj.exception.OrderDetailNotFoundException;
 import com.example.shopdemoitsj.mapper.OrderDetailMapper;
 import com.example.shopdemoitsj.model.Customer;
 import com.example.shopdemoitsj.model.Item;
@@ -56,7 +57,7 @@ class OrderDetailServiceImplTest {
   }
 
   @Test
-  void whenFindById_thenReturnOrderDetail() {
+  void whenFindById_thenReturnOrderDetail() throws OrderDetailNotFoundException {
     when(orderDetailRepository.findById(orderDetail.getId()))
         .thenReturn(java.util.Optional.of(orderDetail));
 

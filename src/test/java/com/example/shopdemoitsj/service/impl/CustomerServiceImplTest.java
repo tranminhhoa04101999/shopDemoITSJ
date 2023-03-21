@@ -1,18 +1,13 @@
 package com.example.shopdemoitsj.service.impl;
 
-
-import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.example.shopdemoitsj.dto.CustomerDto;
-import com.example.shopdemoitsj.dto.ItemDto;
 import com.example.shopdemoitsj.exception.CustomerNotFoundException;
-import com.example.shopdemoitsj.exception.ItemNotFoundException;
 import com.example.shopdemoitsj.mapper.CustomerMapper;
 import com.example.shopdemoitsj.model.Customer;
 import com.example.shopdemoitsj.repository.CustomerRepository;
@@ -34,17 +29,15 @@ import org.mockito.quality.Strictness;
 @MockitoSettings(strictness = Strictness.LENIENT)
 class CustomerServiceImplTest {
 
-  @Mock
-  CustomerRepository customerRepository;
-  @InjectMocks
-  CustomerServiceImpl customerService;
+  @Mock CustomerRepository customerRepository;
+  @InjectMocks CustomerServiceImpl customerService;
 
   CustomerDto customerDto;
   Customer customer;
 
   @BeforeEach
   void init() {
-    customer = new Customer(1,"hoa","123456",0);
+    customer = new Customer(1, "hoa", "123456", 0);
     customerDto = CustomerMapper.getInstance().toDto(customer);
   }
 
@@ -56,23 +49,24 @@ class CustomerServiceImplTest {
 
   @Test
   void whenFindAll_thenReturnList() {
-    //precondition
+    // precondition
     List<Customer> mockData = new ArrayList<>();
 
     for (int i = 0; i < 3; i++) {
-      mockData.add(new Customer(i,"hoa","123456",0));
+      mockData.add(new Customer(i, "hoa", "123456", 0));
     }
-    //transfer dto
-    List<CustomerDto> mockDataDto = mockData.stream().map(temp -> CustomerMapper.getInstance().toDto(temp)).collect(
-        Collectors.toList());
+    // transfer dto
+    List<CustomerDto> mockDataDto =
+        mockData.stream()
+            .map(temp -> CustomerMapper.getInstance().toDto(temp))
+            .collect(Collectors.toList());
     // when
     when(customerRepository.findAll()).thenReturn(mockData);
     List<CustomerDto> result = customerService.findAll();
-    //then
+    // then
     assertThat(result).hasSameSizeAs(mockData).hasSameElementsAs(mockDataDto);
 
     verify(customerRepository).findAll();
-
   }
 
   @Test
@@ -80,13 +74,12 @@ class CustomerServiceImplTest {
     // precondition
     int invalidItemId = 7000;
     when(customerRepository.findById(any(Integer.class))).thenReturn(Optional.ofNullable(null));
-    //when
+    // when
 
-    //then
+    // then
     assertThatThrownBy(() -> customerService.findById(invalidItemId))
         .isInstanceOf(CustomerNotFoundException.class);
     verify(customerRepository).findById(any(Integer.class));
-
   }
 
   @Test

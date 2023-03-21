@@ -9,6 +9,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.example.shopdemoitsj.dto.ItemDto;
+import com.example.shopdemoitsj.exception.ItemCascadeDeleteError;
 import com.example.shopdemoitsj.exception.ItemNotFoundException;
 import com.example.shopdemoitsj.mapper.ItemMapper;
 import com.example.shopdemoitsj.model.Item;
@@ -99,7 +100,7 @@ class ItemServiceImplTest {
 
   @Test
   @DisplayName("JUnit test delete item by id ")
-  void givenItemId_whenDelete_thenReturnTrue() {
+  void givenItemId_whenDelete_thenReturnTrue() throws ItemCascadeDeleteError, Exception {
     // precodition
     when(itemRepository.findById(item.getId())).thenReturn(Optional.of(item));
     doNothing().when(itemRepository).deleteById(item.getId());
@@ -121,6 +122,5 @@ class ItemServiceImplTest {
 
     // then
     assertThat(result.getName()).isEqualTo(item.getName());
-
   }
 }

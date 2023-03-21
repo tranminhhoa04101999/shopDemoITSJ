@@ -1,8 +1,6 @@
 package com.example.shopdemoitsj.mapper;
 
-import com.example.shopdemoitsj.dto.ItemDto;
 import com.example.shopdemoitsj.dto.OrderDetailDto;
-import com.example.shopdemoitsj.model.Item;
 import com.example.shopdemoitsj.model.OrderDetail;
 
 /** mapper. */
@@ -20,14 +18,14 @@ public class OrderDetailMapper {
       instance = new OrderDetailMapper();
     }
     return instance;
-
   }
   /**
    * To entity.
    *
-   * @param dto the  dto
+   * @param dto the dto
    * @return the entity
    */
+
   public OrderDetail toEntity(OrderDetailDto dto) {
     OrderDetail orderDetail = new OrderDetail();
     orderDetail.setId(dto.getId());

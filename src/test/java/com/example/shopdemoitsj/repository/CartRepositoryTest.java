@@ -24,7 +24,7 @@ class CartRepositoryTest {
 
   @BeforeEach
   void init() {
-    Customer customer = new Customer(1,"hoa","123456",1);
+    Customer customer = new Customer(1, "hoa", "123456", 1);
     Cart cart = new Cart(1, customer);
     cartInstance = cart;
   }
@@ -42,9 +42,8 @@ class CartRepositoryTest {
   @DisplayName("JUnit test find all cart")
   void whenFindAll_thenReturnAllCart() {
 
-    Cart cart1 = new Cart(1, new Customer(1,"hoa","123456",1));
-    Cart cart2 = new Cart(2, new Customer(2,"hoa","123456",1));
-
+    Cart cart1 = new Cart(1, new Customer(1, "hoa", "123456", 1));
+    Cart cart2 = new Cart(2, new Customer(2, "hoa", "123456", 1));
 
     cartRepository.save(cart1);
     cartRepository.save(cart2);

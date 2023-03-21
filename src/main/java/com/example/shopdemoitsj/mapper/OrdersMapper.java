@@ -17,6 +17,7 @@ public class OrdersMapper {
    *
    * @return the instance
    */
+
   public static OrdersMapper getInstance() {
     if (instance == null) {
       instance = new OrdersMapper();
@@ -29,6 +30,7 @@ public class OrdersMapper {
    * @param dto the item dto
    * @return the order entity
    */
+
   public Orders toEntity(OrdersDto dto) {
     Orders orders = new Orders();
     orders.setId(dto.getId());
@@ -42,6 +44,7 @@ public class OrdersMapper {
    * @param orders the item dto
    * @return the order dto
    */
+
   public OrdersDto toDto(Orders orders) {
     OrdersDto orderDto = new OrdersDto();
     orderDto.setId(orders.getId());

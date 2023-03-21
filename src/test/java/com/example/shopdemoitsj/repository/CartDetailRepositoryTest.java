@@ -28,7 +28,7 @@ class CartDetailRepositoryTest {
 
   @BeforeEach
   void init() {
-    Customer customer = new Customer(1,"hoa","123456",1);
+    Customer customer = new Customer(1, "hoa", "123456", 1);
     Cart cart = new Cart(1, customer);
     Item item = new Item(1, "hoa", 100);
     CartDetail cartDetail = new CartDetail(1, cart, item, 2, new Date());
@@ -43,20 +43,20 @@ class CartDetailRepositoryTest {
     assertThat(result).isNotNull();
     assertThat(result.getId()).isPositive();
   }
-//    @Test
-//    @DisplayName("JUnit test find all cart detail")
-//    void whenFindAll_thenReturnAllCartDetail() {
-//
-//      Customer customer = new Customer(2,"hoa","123456",1);
-//      Cart cart = new Cart(2,customer);
-//      Item item = new Item(2,"go",200);
-//      CartDetail cartDetail = new CartDetail(2,cart,item,2,new Date());
-//      cartDetailRepository.save(cartDetailInstance);
-//      cartDetailRepository.save(cartDetail);
-//
-//      List<CartDetail> result = cartDetailRepository.findAll();
-//      assertThat(result).hasSize(2);
-//    }
+  //    @Test
+  //    @DisplayName("JUnit test find all cart detail")
+  //    void whenFindAll_thenReturnAllCartDetail() {
+  //
+  //      Customer customer = new Customer(2,"hoa","123456",1);
+  //      Cart cart = new Cart(2,customer);
+  //      Item item = new Item(2,"go",200);
+  //      CartDetail cartDetail = new CartDetail(2,cart,item,2,new Date());
+  //      cartDetailRepository.save(cartDetailInstance);
+  //      cartDetailRepository.save(cartDetail);
+  //
+  //      List<CartDetail> result = cartDetailRepository.findAll();
+  //      assertThat(result).hasSize(2);
+  //    }
 
   @Test
   @DisplayName("JUnit test update cart details")

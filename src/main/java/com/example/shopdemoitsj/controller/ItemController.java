@@ -1,6 +1,7 @@
 package com.example.shopdemoitsj.controller;
 
 import com.example.shopdemoitsj.dto.ItemDto;
+import com.example.shopdemoitsj.exception.ItemCascadeDeleteError;
 import com.example.shopdemoitsj.exception.ItemNotFoundException;
 import com.example.shopdemoitsj.service.impl.ItemServiceImpl;
 import java.util.List;
@@ -16,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *  sản phẩm controller.
- * */
+/** sản phẩm controller. */
 @RestController
 @RequestMapping("/api")
 public class ItemController {
@@ -37,20 +36,19 @@ public class ItemController {
   /// save item coi lai id
 
   @PostMapping("/items")
-  public ResponseEntity<HttpStatus> save(@RequestBody ItemDto itemDto) {
-    itemServiceImpl.saveItem(itemDto);
-    return new ResponseEntity<>(HttpStatus.CREATED);
+  public ResponseEntity<ItemDto> save(@RequestBody ItemDto itemDto) {
+
+    return new ResponseEntity<>(itemServiceImpl.saveItem(itemDto), HttpStatus.CREATED);
   }
 
   @PutMapping("/items")
-  public ResponseEntity<HttpStatus> update(@RequestBody ItemDto itemDto) {
-    itemServiceImpl.saveItem(itemDto);
-    return new ResponseEntity<>(HttpStatus.OK);
+  public ResponseEntity<ItemDto> update(@RequestBody ItemDto itemDto) {
+    return new ResponseEntity<>(itemServiceImpl.saveItem(itemDto), HttpStatus.OK);
   }
 
   @DeleteMapping("/items/{itemId}")
-  public ResponseEntity<HttpStatus> delete(@PathVariable int itemId) {
-    itemServiceImpl.delete(itemId);
-    return new ResponseEntity<>(HttpStatus.OK);
+  public ResponseEntity<HttpStatus> delete(@PathVariable int itemId)
+      throws ItemCascadeDeleteError, Exception {
+    return itemServiceImpl.delete(itemId);
   }
 }
