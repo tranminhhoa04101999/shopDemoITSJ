@@ -13,4 +13,6 @@ public interface CustomerService {
   CustomerDto findById(int custonmerId) throws CustomerNotFoundException;
 
   CustomerDto save(CustomerDto customerDto);
+
+  CustomerDto findByUserName(String userName);
 }

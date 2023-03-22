@@ -2,11 +2,20 @@ package com.example.shopdemoitsj.controller;
 
 import com.example.shopdemoitsj.dto.CustomerDto;
 import com.example.shopdemoitsj.exception.CustomerNotFoundException;
+import com.example.shopdemoitsj.jwt.CustomUserDetails;
+import com.example.shopdemoitsj.jwt.JwtTokenProvider;
+import com.example.shopdemoitsj.model.Customer;
 import com.example.shopdemoitsj.service.impl.CustomerServiceImpl;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +31,32 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerController {
   @Autowired private CustomerServiceImpl customerServiceImpl;
 
+  @Autowired
+  AuthenticationManager authenticationManager;
+
+  @Autowired
+  private JwtTokenProvider tokenProvider;
+
+  @PostMapping("/login")
+  public String authenticaLogin(@Valid @RequestBody Customer customer) {
+
+    // Xác thực từ username và password.
+    Authentication authentication = authenticationManager.authenticate(
+        new UsernamePasswordAuthenticationToken(
+            customer.getUsername(),
+            customer.getPassword()
+        )
+    );
+    // Nếu không xảy ra exception tức là thông tin hợp lệ
+    // Set thông tin authentication vào Security Context
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+
+    // Trả về jwt cho người dùng.
+    return tokenProvider.generateToken((CustomUserDetails) authentication.getPrincipal());
+  }
+
   @GetMapping("/customers")
+  @PreAuthorize("hasRole('ROLE_USER')")
   public ResponseEntity<List<CustomerDto>> findAll() {
     return new ResponseEntity<>(customerServiceImpl.findAll(), HttpStatus.OK);
   }
@@ -34,6 +68,7 @@ public class CustomerController {
   }
 
   @PostMapping("/customers")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   public ResponseEntity<HttpStatus> save(@RequestBody CustomerDto customerDto) {
     customerServiceImpl.save(customerDto);
     return new ResponseEntity<>(HttpStatus.CREATED);

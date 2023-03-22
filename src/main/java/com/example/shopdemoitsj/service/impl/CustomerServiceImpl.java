@@ -20,6 +20,12 @@ public class CustomerServiceImpl implements CustomerService {
   @Autowired private CustomerRepository customerRepository;
 
   @Override
+  public CustomerDto findByUserName(String userName) {
+    Customer customer = customerRepository.findByUsername(userName);
+    return CustomerMapper.getInstance().toDto(customer);
+  }
+
+  @Override
   public List<CustomerDto> findAll() {
     return customerRepository.findAll().stream()
         .map(customer -> CustomerMapper.getInstance().toDto(customer))

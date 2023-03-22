@@ -7,4 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * jpa.
  * */
-public interface CustomerRepository extends JpaRepository<Customer, Integer> {}
+public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+  Customer findByUsername(String userName);
+
+}
