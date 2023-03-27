@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class JwtTokenProvider {
   private final String JWT_SECRET = "minhhoa";
-  private final long JWT_EXPIRATION = 1800000;
+  private final long JWT_EXPIRATION = 80000000L;
 
   public String generateToken(CustomUserDetails userDetails) {
     // Lấy thông tin user

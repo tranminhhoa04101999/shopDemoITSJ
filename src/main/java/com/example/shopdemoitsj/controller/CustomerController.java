@@ -16,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  *  người mua hàng controller.
  * */
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class CustomerController {
   @Autowired private CustomerServiceImpl customerServiceImpl;
@@ -72,5 +74,10 @@ public class CustomerController {
   public ResponseEntity<HttpStatus> save(@RequestBody CustomerDto customerDto) {
     customerServiceImpl.save(customerDto);
     return new ResponseEntity<>(HttpStatus.CREATED);
+  }
+
+  @GetMapping("/customers/username/{username}")
+  public ResponseEntity<CustomerDto> findByUsername (@PathVariable String username){
+    return  new ResponseEntity<>(customerServiceImpl.findByUserName(username),HttpStatus.OK);
   }
 }

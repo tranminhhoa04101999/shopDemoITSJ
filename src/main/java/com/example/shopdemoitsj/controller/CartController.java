@@ -11,6 +11,7 @@ import com.example.shopdemoitsj.service.impl.CartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** giỏ hành controller. */
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class CartController {
   @Autowired private CartServiceImpl cartServiceImpl;
@@ -44,7 +46,8 @@ public class CartController {
   @PutMapping("/carts")
   public ResponseEntity<CartDetailDto> updateCartDetail(@RequestBody CartDetailDto cartDetailDto)
       throws QuantityLessThanOneException {
-    return new ResponseEntity<>(cartDetailService.update(cartDetailDto), HttpStatus.NO_CONTENT);
+    CartDetailDto dto = cartDetailService.update(cartDetailDto);
+    return new ResponseEntity<>(dto, HttpStatus.OK);
   }
 
   @DeleteMapping("/carts/{cartDetailId}")
