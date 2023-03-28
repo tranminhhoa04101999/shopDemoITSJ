@@ -3,21 +3,24 @@ package com.example.shopdemoitsj.service.impl;
 import com.example.shopdemoitsj.dto.CustomerDto;
 import com.example.shopdemoitsj.exception.CustomerNotFoundException;
 import com.example.shopdemoitsj.mapper.CustomerMapper;
+import com.example.shopdemoitsj.model.Cart;
 import com.example.shopdemoitsj.model.Customer;
+import com.example.shopdemoitsj.repository.CartRepository;
 import com.example.shopdemoitsj.repository.CustomerRepository;
 import com.example.shopdemoitsj.service.CustomerService;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-/**
- * customer impl customer interface.
- * */
+/** customer impl customer interface. */
 @Service
 public class CustomerServiceImpl implements CustomerService {
   @Autowired private CustomerRepository customerRepository;
+
+  @Autowired CartRepository cartRepository;
 
   @Override
   public CustomerDto findByUserName(String userName) {
@@ -31,6 +34,8 @@ public class CustomerServiceImpl implements CustomerService {
         .map(customer -> CustomerMapper.getInstance().toDto(customer))
         .collect(Collectors.toList());
   }
+
+  @Autowired PasswordEncoder passwordEncoder;
 
   @Override
   public CustomerDto findById(int customerId) throws CustomerNotFoundException {
@@ -47,7 +52,16 @@ public class CustomerServiceImpl implements CustomerService {
 
   @Override
   public CustomerDto save(CustomerDto customerDto) {
-    customerRepository.save(CustomerMapper.getInstance().toEntity(customerDto));
-    return customerDto;
+    // tạo customer
+    Customer customer = CustomerMapper.getInstance().toEntity(customerDto);
+    customer.setPassword(passwordEncoder.encode(customer.getPassword()));
+    Customer customerSave = customerRepository.save(customer);
+    // khi tạo thành công tạo luôn giỏ hàng trống cho họ.
+    if (customerSave.getId() > 0) {
+      Cart cart = new Cart(0, customerSave);
+      cartRepository.save(cart);
+    }
+
+    return CustomerMapper.getInstance().toDto(customerSave);
   }
 }

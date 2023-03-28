@@ -33,7 +33,7 @@ public class CartController {
   @Autowired private CartDetailRepository cartDetailRepository;
 
   @GetMapping("/carts/{customerId}")
-  public CartDto findById(@PathVariable int customerId) throws CartDetailNotFoundException {
+  public CartDto findById(@PathVariable int customerId)  {
     return cartServiceImpl.findByCustomerId(customerId);
   }
 

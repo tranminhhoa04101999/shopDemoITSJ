@@ -7,5 +7,5 @@ import com.example.shopdemoitsj.exception.CartDetailNotFoundException;
  * cart service interface.
  * */
 public interface CartService {
-  CartDto findByCustomerId(int customerId) throws CartDetailNotFoundException;
+  CartDto findByCustomerId(int customerId);
 }

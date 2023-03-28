@@ -24,31 +24,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *  người mua hàng controller.
- * */
+/** người mua hàng controller. */
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
 public class CustomerController {
   @Autowired private CustomerServiceImpl customerServiceImpl;
 
-  @Autowired
-  AuthenticationManager authenticationManager;
+  @Autowired AuthenticationManager authenticationManager;
 
-  @Autowired
-  private JwtTokenProvider tokenProvider;
+  @Autowired private JwtTokenProvider tokenProvider;
 
   @PostMapping("/login")
   public String authenticaLogin(@Valid @RequestBody Customer customer) {
 
     // Xác thực từ username và password.
-    Authentication authentication = authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(
-            customer.getUsername(),
-            customer.getPassword()
-        )
-    );
+    Authentication authentication =
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                customer.getUsername(), customer.getPassword()));
     // Nếu không xảy ra exception tức là thông tin hợp lệ
     // Set thông tin authentication vào Security Context
     SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -70,14 +64,14 @@ public class CustomerController {
   }
 
   @PostMapping("/customers")
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
-  public ResponseEntity<HttpStatus> save(@RequestBody CustomerDto customerDto) {
-    customerServiceImpl.save(customerDto);
-    return new ResponseEntity<>(HttpStatus.CREATED);
+  public ResponseEntity<CustomerDto> save(@RequestBody CustomerDto customerDto) {
+    return new ResponseEntity<>(customerServiceImpl.save(customerDto),HttpStatus.CREATED);
   }
 
   @GetMapping("/customers/username/{username}")
-  public ResponseEntity<CustomerDto> findByUsername (@PathVariable String username){
-    return  new ResponseEntity<>(customerServiceImpl.findByUserName(username),HttpStatus.OK);
+  public ResponseEntity<CustomerDto> findByUsername(@PathVariable String username) {
+    return new ResponseEntity<>(customerServiceImpl.findByUserName(username), HttpStatus.OK);
   }
+
+
 }

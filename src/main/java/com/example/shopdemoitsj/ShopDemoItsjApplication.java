@@ -2,6 +2,9 @@ package com.example.shopdemoitsj;
 
 import com.example.shopdemoitsj.dto.CustomerDto;
 import com.example.shopdemoitsj.mapper.CustomerMapper;
+import com.example.shopdemoitsj.model.Cart;
+import com.example.shopdemoitsj.model.Customer;
+import com.example.shopdemoitsj.repository.CartRepository;
 import com.example.shopdemoitsj.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -23,6 +26,9 @@ public class ShopDemoItsjApplication implements CommandLineRunner {
   CustomerRepository customerRepository;
 
   @Autowired
+  CartRepository cartRepository;
+
+  @Autowired
   PasswordEncoder passwordEncoder;
 
   @Override
@@ -34,7 +40,10 @@ public class ShopDemoItsjApplication implements CommandLineRunner {
     customerDto.setPassword(passwordEncoder.encode("123"));
     customerDto.setUsername("hoa1");
     customerDto.setType(1);
-    customerRepository.save(CustomerMapper.getInstance().toEntity(customerDto));
-    System.out.println(customerDto);
+    Customer customer = customerRepository.save(CustomerMapper.getInstance().toEntity(customerDto));
+    Cart cart = new Cart(0,customer);
+    Cart cartSave = cartRepository.save(cart);
+    System.out.println(cartSave);
+    System.out.println(customer);
   }
 }

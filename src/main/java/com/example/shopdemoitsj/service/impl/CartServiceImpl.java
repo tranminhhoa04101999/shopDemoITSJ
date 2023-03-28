@@ -25,7 +25,7 @@ public class CartServiceImpl implements CartService {
   @Autowired private CartDetailRepository cartDetailRepository;
 
   @Override
-  public CartDto findByCustomerId(int customerId) throws CartDetailNotFoundException {
+  public CartDto findByCustomerId(int customerId)  {
     CartDto cartDto = new CartDto();
     Cart cart = cartRepository.findByCustomerId(customerId);
     cartDto.setId(cart.getId());
@@ -40,9 +40,7 @@ public class CartServiceImpl implements CartService {
         cartDetailRepository.findByCartId(cart.getId()).stream()
             .map(temp -> CartDetailMapper.getInstance().toDto(temp))
             .collect(Collectors.toList());
-    if (list.isEmpty()) {
-      throw new CartDetailNotFoundException();
-    }
+
     cartDto.setCartDetailDtos(list);
     return cartDto;
   }
