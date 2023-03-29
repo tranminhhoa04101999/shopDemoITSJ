@@ -45,5 +45,14 @@ public class ShopDemoItsjApplication implements CommandLineRunner {
     Cart cartSave = cartRepository.save(cart);
     System.out.println(cartSave);
     System.out.println(customer);
+    // khoi tao admin
+    CustomerDto customerDto2 = new CustomerDto();
+    customerDto2.setId(0);
+    customerDto2.setPassword(passwordEncoder.encode("123"));
+    customerDto2.setUsername("admin");
+    customerDto2.setType(0);
+    Customer customer2 = customerRepository.save(CustomerMapper.getInstance().toEntity(customerDto2));
+    System.out.println(customer2);
+
   }
 }
