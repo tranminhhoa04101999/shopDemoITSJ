@@ -32,6 +32,8 @@ public class Orders {
   @Column(name = "id")
   private int id;
 
+  private int status;
+
   @ManyToOne
   @JoinColumn(name = "customerid")
   private Customer customer;

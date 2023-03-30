@@ -34,8 +34,9 @@ public class OrdersMapper {
   public Orders toEntity(OrdersDto dto) {
     Orders orders = new Orders();
     orders.setId(dto.getId());
+    orders.setStatus(dto.getStatus());
     orders.setCustomer(CustomerMapper.getInstance().toEntity(dto.getCustomerDto()));
-    orders.setOrderDate(dto.getOrderdate());
+    orders.setOrderDate(dto.getOrderDate());
     return orders;
   }
   /**
@@ -48,8 +49,9 @@ public class OrdersMapper {
   public OrdersDto toDto(Orders orders) {
     OrdersDto orderDto = new OrdersDto();
     orderDto.setId(orders.getId());
+    orderDto.setStatus(orders.getStatus());
     orderDto.setCustomerDto(CustomerMapper.getInstance().toDto(orders.getCustomer()));
-    orderDto.setOrderdate(orders.getOrderDate());
+    orderDto.setOrderDate(orders.getOrderDate());
     return orderDto;
   }
 

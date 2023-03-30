@@ -20,4 +20,6 @@ public interface OrdersService {
   List<OrdersDto> findByCustomerId(int id);
 
   OrdersDto findByCustomerIdAndMaxOrderId(int customerId);
+
+  List<OrdersDto> findAll();
 }

@@ -54,7 +54,7 @@ public class OrdersServiceImpl implements OrdersService {
                   })
               .collect(Collectors.toList());
       // save order
-      Orders orders = new Orders(0, cart.getCustomer(), new Date());
+      Orders orders = new Orders(0, 0, cart.getCustomer(), new Date());
       Orders saveOrders = ordersRepository.save(orders);
       // save order details
       for (int i = 0; i < cartDetailList.size(); i++) {
@@ -102,5 +102,12 @@ public class OrdersServiceImpl implements OrdersService {
   public OrdersDto findByCustomerIdAndMaxOrderId(int customerId) {
     return OrdersMapper.getInstance()
         .toDto(ordersRepository.findByCustomerIdAndMaxOrderId(customerId));
+  }
+
+  @Override
+  public List<OrdersDto> findAll() {
+    return ordersRepository.findAll().stream()
+        .map(item -> OrdersMapper.getInstance().toDto(item))
+        .collect(Collectors.toList());
   }
 }

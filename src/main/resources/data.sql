@@ -1,5 +1,5 @@
 INSERT INTO customer (username, password,type ) values ('hoa','123',0)
-INSERT INTO customer (username, password,type ) values ('chien','123',1)
+INSERT INTO customer (username, password,type ) values ('nguoimua','123',1)
 INSERT INTO customer (username, password,type ) values ('khach','123',1)
 
 -- Item
@@ -15,8 +15,8 @@ INSERT INTO cart(customerid) values (2)
 INSERT INTO cartdetail(cartid,itemid,quantity,dateadded) values (1,1,2,'2023-03-20')
 
 -- order
-INSERT INTO orders(customerid,orderdate) values (2,'2023-03-20')
-INSERT INTO orders(customerid,orderdate) values (2,'2023-03-21')
+INSERT INTO orders(customerid,status,orderdate) values (2,0,'2023-03-20')
+INSERT INTO orders(customerid,status,orderdate) values (2,0,'2023-03-21')
 
 -- order detail
 INSERT INTO orderdetail(orderid,itemid,quantity) values (1,1,2)
