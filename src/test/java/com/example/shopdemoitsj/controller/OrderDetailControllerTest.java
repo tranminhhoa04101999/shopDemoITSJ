@@ -38,7 +38,7 @@ class OrderDetailControllerTest {
   void init() {
     Item item = new Item(1, "gio", 123);
     Customer customer = new Customer(1, "hoa", "123", 1);
-    Orders orders = new Orders(1, customer, new Date());
+    Orders orders = new Orders(1, 0,customer, new Date());
     orderDetail = new OrderDetail(1, orders, item, 2);
     orderDetailDto = OrderDetailMapper.getInstance().toDto(orderDetail);
   }
@@ -53,7 +53,7 @@ class OrderDetailControllerTest {
   void findByOrderId() throws OrderDetailNotFoundException {
     Item item = new Item(2, "gio2", 123);
     Customer customer = new Customer(1, "hoa", "123", 1);
-    Orders orders = new Orders(1, customer, new Date());
+    Orders orders = new Orders(1,0, customer, new Date());
     OrderDetail orderDetail2 = new OrderDetail(2, orders, item, 2);
 
     List<OrderDetailDto> orderDetailDtoList = new ArrayList<>();

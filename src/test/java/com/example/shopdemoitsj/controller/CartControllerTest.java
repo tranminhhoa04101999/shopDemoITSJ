@@ -29,13 +29,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.TestPropertySource;
 
 /**
  * test controller cart.
  * */
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class CartControllerTest {
+@TestPropertySource("classpath:test.properties")
+ class CartControllerTest {
   @Mock CartServiceImpl cartService;
   @InjectMocks CartController cartController;
 

@@ -38,7 +38,7 @@ class OrdersServiceImplTest {
 
   @BeforeEach
   void init() {
-    orders = new Orders(1, new Customer(1, "hoa", "123", 1), new Date());
+    orders = new Orders(1,0, new Customer(1, "hoa", "123", 1), new Date());
     ordersDto = OrdersMapper.getInstance().toDto(orders);
   }
 

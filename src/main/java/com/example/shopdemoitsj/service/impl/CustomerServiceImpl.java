@@ -2,6 +2,7 @@ package com.example.shopdemoitsj.service.impl;
 
 import com.example.shopdemoitsj.dto.CustomerDto;
 import com.example.shopdemoitsj.exception.CustomerNotFoundException;
+import com.example.shopdemoitsj.exception.UsernameExistException;
 import com.example.shopdemoitsj.mapper.CustomerMapper;
 import com.example.shopdemoitsj.model.Cart;
 import com.example.shopdemoitsj.model.Customer;
@@ -51,7 +52,14 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  public CustomerDto save(CustomerDto customerDto) {
+  public CustomerDto save(CustomerDto customerDto) throws UsernameExistException {
+    // kiểm tra username tồn tại chưa
+    Customer customer1 = customerRepository.findByUsername(customerDto.getUsername());
+    System.out.println(customer1);
+    if (customer1 != null) {
+      throw new UsernameExistException();
+    }
+
     // tạo customer
     Customer customer = CustomerMapper.getInstance().toEntity(customerDto);
     customer.setPassword(passwordEncoder.encode(customer.getPassword()));

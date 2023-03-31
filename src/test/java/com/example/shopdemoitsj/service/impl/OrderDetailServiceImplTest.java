@@ -36,7 +36,7 @@ class OrderDetailServiceImplTest {
 
   @BeforeEach
   void init() {
-    Orders orders = new Orders(1, new Customer(1, "hoa", "123", 1), new Date());
+    Orders orders = new Orders(1,0, new Customer(1, "hoa", "123", 1), new Date());
     Item item = new Item(1, "go", 123);
     orderDetail = new OrderDetail(1, orders, item, 2);
     orderDetailDto = OrderDetailMapper.getInstance().toDto(orderDetail);

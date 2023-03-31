@@ -36,7 +36,7 @@ class OrderControllerTest {
   @BeforeEach
   void init() {
     Customer customer = new Customer(1, "hoa", "123", 1);
-    orders = new Orders(1, customer, new Date());
+    orders = new Orders(1,0, customer, new Date());
     ordersDto = OrdersMapper.getInstance().toDto(orders);
   }
 
@@ -51,7 +51,7 @@ class OrderControllerTest {
   void findByCustomerId() {
     List<OrdersDto> ordersDtoList = new ArrayList<>();
     Customer customer = new Customer(1, "hoa", "123", 1);
-    Orders orders2 = new Orders(2, customer, new Date());
+    Orders orders2 = new Orders(2, 0, customer, new Date());
     ordersDtoList.add(OrdersMapper.getInstance().toDto(orders2));
     ordersDtoList.add(ordersDto);
 

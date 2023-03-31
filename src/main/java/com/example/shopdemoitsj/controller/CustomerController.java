@@ -2,6 +2,7 @@ package com.example.shopdemoitsj.controller;
 
 import com.example.shopdemoitsj.dto.CustomerDto;
 import com.example.shopdemoitsj.exception.CustomerNotFoundException;
+import com.example.shopdemoitsj.exception.UsernameExistException;
 import com.example.shopdemoitsj.jwt.CustomUserDetails;
 import com.example.shopdemoitsj.jwt.JwtTokenProvider;
 import com.example.shopdemoitsj.model.Customer;
@@ -64,7 +65,8 @@ public class CustomerController {
   }
 
   @PostMapping("/customers")
-  public ResponseEntity<CustomerDto> save(@RequestBody CustomerDto customerDto) {
+  public ResponseEntity<CustomerDto> save(@RequestBody CustomerDto customerDto)
+      throws UsernameExistException {
     return new ResponseEntity<>(customerServiceImpl.save(customerDto),HttpStatus.CREATED);
   }
 

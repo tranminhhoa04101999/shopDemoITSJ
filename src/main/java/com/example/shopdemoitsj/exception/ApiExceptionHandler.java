@@ -6,9 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
-/**
- *  exception handler lưu các exception của project.
- * */
+/** exception handler lưu các exception của project. */
 @RestControllerAdvice
 public class ApiExceptionHandler {
   @ExceptionHandler(Exception.class)
@@ -70,5 +68,11 @@ public class ApiExceptionHandler {
   @ResponseStatus(value = HttpStatus.BAD_REQUEST)
   public ErrorMessage quantityLessThanOneException(Exception ex, WebRequest request) {
     return new ErrorMessage(400, "Không được cập nhật số lượng bé hơn 1 !");
+  }
+
+  @ExceptionHandler(UsernameExistException.class)
+  @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+  public ErrorMessage usernameExistException(Exception ex, WebRequest request) {
+    return new ErrorMessage(400, "tài khoản đã tồn tại !");
   }
 }

@@ -25,7 +25,7 @@ class OrdersRepositoryTest {
   @BeforeEach
   void init() {
     Customer customer = new Customer(1, "name", "password", 0);
-    Orders orders = new Orders(1, customer, new Date());
+    Orders orders = new Orders(1,0, customer, new Date());
     ordersInstance = orders;
   }
 
@@ -43,7 +43,7 @@ class OrdersRepositoryTest {
   void whenFindAll_thenReturnAllOrder() {
 
     Customer customer = new Customer(2, "name", "password", 0);
-    Orders orders = new Orders(2, customer, new Date());
+    Orders orders = new Orders(2, 0,customer, new Date());
 
     ordersRepository.save(orders);
     ordersRepository.save(ordersInstance);

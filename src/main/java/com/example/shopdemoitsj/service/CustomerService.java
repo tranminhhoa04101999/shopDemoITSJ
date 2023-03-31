@@ -2,6 +2,7 @@ package com.example.shopdemoitsj.service;
 
 import com.example.shopdemoitsj.dto.CustomerDto;
 import com.example.shopdemoitsj.exception.CustomerNotFoundException;
+import com.example.shopdemoitsj.exception.UsernameExistException;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ public interface CustomerService {
 
   CustomerDto findById(int custonmerId) throws CustomerNotFoundException;
 
-  CustomerDto save(CustomerDto customerDto);
+  CustomerDto save(CustomerDto customerDto) throws UsernameExistException;
 
   CustomerDto findByUserName(String userName);
 

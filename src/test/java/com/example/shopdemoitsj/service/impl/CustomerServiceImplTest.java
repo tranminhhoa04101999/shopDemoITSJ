@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import com.example.shopdemoitsj.dto.CustomerDto;
 import com.example.shopdemoitsj.exception.CustomerNotFoundException;
+import com.example.shopdemoitsj.exception.UsernameExistException;
 import com.example.shopdemoitsj.mapper.CustomerMapper;
 import com.example.shopdemoitsj.model.Customer;
 import com.example.shopdemoitsj.repository.CustomerRepository;
@@ -83,7 +84,7 @@ class CustomerServiceImplTest {
   }
 
   @Test
-  void whenSave_thenReturnSaveCustomer() {
+  void whenSave_thenReturnSaveCustomer() throws UsernameExistException {
     // precondition
     when(customerRepository.save(customer)).thenReturn(customer);
     //    // when
