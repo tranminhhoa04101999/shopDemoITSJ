@@ -12,6 +12,7 @@ import com.example.shopdemoitsj.model.Cart;
 import com.example.shopdemoitsj.model.CartDetail;
 import com.example.shopdemoitsj.model.OrderDetail;
 import com.example.shopdemoitsj.model.Orders;
+import com.example.shopdemoitsj.repository.CartDetailRepository;
 import com.example.shopdemoitsj.repository.OrderDetailRepository;
 import com.example.shopdemoitsj.repository.OrdersRepository;
 import com.example.shopdemoitsj.service.OrdersService;
@@ -28,6 +29,9 @@ public class OrdersServiceImpl implements OrdersService {
   @Autowired OrdersRepository ordersRepository;
 
   @Autowired OrderDetailRepository orderDetailRepository;
+
+  @Autowired
+  CartDetailRepository cartDetailRepository;
 
   @Override
   public OrdersDto saveOrder(OrdersDto ordersDto) {
@@ -64,8 +68,11 @@ public class OrdersServiceImpl implements OrdersService {
                 saveOrders,
                 cartDetailList.get(i).getItem(),
                 cartDetailList.get(i).getQuantity());
-        orderDetailRepository.save(orderDetail);
+        OrderDetail tempDelele = orderDetailRepository.save(orderDetail);
+        // clear cart details
+        cartDetailRepository.deleteById(cartDetailList.get(i).getId());
       }
+
     } catch (Exception ex) {
       throw new OrderFalse();
     }
@@ -92,7 +99,6 @@ public class OrdersServiceImpl implements OrdersService {
   @Override
   public List<OrdersDto> findByCustomerId(int customerId) {
     List<Orders> ordersList = ordersRepository.findByCustomerId(customerId);
-
     return ordersList.stream()
         .map(temp -> OrdersMapper.getInstance().toDto(temp))
         .collect(Collectors.toList());
@@ -106,8 +112,10 @@ public class OrdersServiceImpl implements OrdersService {
 
   @Override
   public List<OrdersDto> findAll() {
+
     return ordersRepository.findAll().stream()
         .map(item -> OrdersMapper.getInstance().toDto(item))
         .collect(Collectors.toList());
+
   }
 }

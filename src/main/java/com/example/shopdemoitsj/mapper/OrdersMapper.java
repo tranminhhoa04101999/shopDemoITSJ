@@ -52,6 +52,7 @@ public class OrdersMapper {
     orderDto.setStatus(orders.getStatus());
     orderDto.setCustomerDto(CustomerMapper.getInstance().toDto(orders.getCustomer()));
     orderDto.setOrderDate(orders.getOrderDate());
+
     return orderDto;
   }
 
