@@ -47,8 +47,7 @@ public class OrdersServiceImpl implements OrdersService {
 
     try {
       Cart cart = CartMapper.getInstance().toEntity(cartDto);
-      // throw exception khi gio hang trong
-      //
+
       List<CartDetail> cartDetailList =
           cartDto.getCartDetailDtos().stream()
               .map(

@@ -47,13 +47,13 @@ public class OrdersController {
     return new ResponseEntity<>(ordersDtoList, HttpStatus.OK);
   }
 
-  @GetMapping("orders/lastestOrder/{customerId}")
+  @GetMapping("/orders/lastestOrder/{customerId}")
   public ResponseEntity<OrdersDto> findByCustomerIdAndMaxOrderId(@PathVariable int customerId) {
     return new ResponseEntity<>(
         ordersService.findByCustomerIdAndMaxOrderId(customerId), HttpStatus.OK);
   }
 
-  @PutMapping("orders")
+  @PutMapping("/orders")
   public OrdersDto updateStatusOrder(@RequestBody OrdersDto ordersDto) {
 
     return ordersService.saveOrder(ordersDto);
