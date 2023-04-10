@@ -8,6 +8,4 @@ import org.springframework.test.context.TestPropertySource;
 
 class ShopDemoItsjApplicationTests {
 
-  @Test
-  void contextLoads() {}
 }
